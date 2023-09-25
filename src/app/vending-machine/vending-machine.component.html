@@ -1,0 +1,39 @@
+  <div>
+    <h2>Vending Machine</h2>
+    <div>
+        <h3>Sections</h3>
+        <ul>
+          <li *ngFor="let section of sections">
+            <h4>Section: {{ section.name }}</h4>
+            <ul>
+              <li *ngFor="let product of section.products">
+              Id:{{ product.id}}  &nbsp; Item: {{ product.name }} &nbsp; Price: {{ product.price }} &nbsp; Available Quantity: {{ product.quantity }}
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    <label for="productId">Please Enter Product ID: </label>
+    <input type="text" id="productId" [(ngModel)]="ProductId" />
+    <button (click)="openDoor()">Open Door</button>   
+    <div *ngIf="doorOpen">
+      <div *ngIf="Section">
+        <h3>Section : {{ Section.name }}</h3>
+        <ul>
+          <li *ngFor="let product of Section.products">
+            Id:{{product.id}} &nbsp; Item: {{ product.name }} &nbsp; Price: {{ product.price }} &nbsp; Available Quantity: {{ product.quantity }}
+            <button (click)="decrementProductQuantity(product)">Choose</button>
+            <p *ngIf="product.quantity <= 0" class="out-of-stock">Out of Stock</p>
+          </li>
+        </ul>
+
+        <button (click)="closeDoor()">Close Door</button>
+      </div>
+      
+    </div>
+  
+    <div *ngIf="!doorOpen">
+      <h3>Total Bill: {{ bill }}</h3>
+    </div>
+  </div>
+  
